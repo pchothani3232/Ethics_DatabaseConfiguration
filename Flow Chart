@@ -1,0 +1,21 @@
+Program.cs
+   ↓
+Check if dbconfig3.txt exists
+   ↓       ↘
+ No        Yes
+ ↓          ↓
+Form1.cs    Read file → test connection
+ ↓          ↓
+Save config file or retry
+   ↘        ↓
+   All good
+      ↓
+LoginForm.cs
+ ↓
+Call stored procedure with login info
+ ↓
+Login Success / Failure
+
+
+
+
