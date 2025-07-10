@@ -23,22 +23,7 @@ namespace DatabaseConfiguration
         string filePath = "D://PRIYA.CHOTHANI//dbconfig3.txt";
         private void Form1_Load(object sender, EventArgs e)
         {
-            ////Not working
-            /////.TXT File Modify
-            //if (File.Exists(filePath))
-            //{
-            //    var lastWriteTime = File.GetLastWriteTime(filePath);
-            //    var currentTime = DateTime.Now;
-
-            //    // If modified within last 1 minute, assume user just changed it
-            //    if ((currentTime - lastWriteTime).TotalMinutes < 1)
-            //    {
-            //        MessageBox.Show("⚠️ Configuration file was just modified. Please verify connection manually.", "Recent Change");
-            //        return; // Stay on Form1
-
-            //    }
-
-            //}
+          
         }
 
   
@@ -69,28 +54,28 @@ namespace DatabaseConfiguration
                 // Step 4: Check if connection is open
                 if (con.State == ConnectionState.Open)
                 {
-                    if(!File.Exists(filePath))
+                    if(!File.Exists(CommClass.filePath))
                     {
-                        File.WriteAllText(filePath, connStr);
+                        File.WriteAllText(CommClass.filePath, connStr);
                         MessageBox.Show("Connection successful and saved!", "Success");
                     }
                     else
                     {
 
-                        File.WriteAllText(filePath, connStr); // overwrite if exists
+                        File.WriteAllText(CommClass.filePath, connStr); // overwrite if exists
                         MessageBox.Show("File already exists. Connection updated!", "Updated");
                     }
                     con.Close();
-
-
-                    CommClass CC = new CommClass();
-                    CC.Connection = connStr;
+                    CommClass.Connection = connStr;
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Connection failed.", "Error");
                 }
-        
+       
             }
         }
     }
