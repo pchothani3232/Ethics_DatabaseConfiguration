@@ -1,0 +1,25 @@
+USE [DatabaseConfiguration]
+GO
+/****** Object:  StoredProcedure [dbo].[LoginCredential]    Script Date: 09-07-2025 21:13:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--[LoginCredential] @status='test'
+ALTER    procedure [dbo].[LoginCredential]
+ @Username nvarchar(50) = '',
+ @Password nvarchar(50) = '',
+ @Status nvarchar(50) = ''
+As
+Begin
+
+	if @status='Select'
+	Begin
+		select * from Users where Username=@Username AND Password=@Password;
+	end
+
+	else if @status='test'
+	Begin
+		select 1 AS test
+	end
+end	
