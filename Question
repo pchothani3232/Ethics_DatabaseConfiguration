@@ -1,0 +1,10 @@
+🔁 HIGH-LEVEL FLOW:
+Program.cs is the starting point.
+
+It checks for the connection configuration file (dbconfig3.txt).
+
+If not present or the connection is invalid, it opens Form1 (connection setup form).
+
+If the connection is valid, it proceeds to LoginForm.
+
+In LoginForm, users log in using stored procedure LoginCredential.
