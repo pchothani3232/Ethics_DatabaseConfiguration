@@ -8,6 +8,8 @@ namespace DatabaseConfiguration
 {
     public class CommClass
     {
-        public string Connection { get; set; }
+        public static string Connection;
+        public static string filePath;
+        //public string Connection { get; set; }
     }
 }
