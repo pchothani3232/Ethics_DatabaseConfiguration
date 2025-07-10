@@ -20,32 +20,43 @@ namespace DatabaseConfiguration
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            string filePath = "D://PRIYA.CHOTHANI//dbconfig3.txt";
+            CommClass.filePath = "D://PRIYA.CHOTHANI//dbconfig3.txt";
 
-            CommClass CC = new CommClass();
-
-            if (!File.Exists(filePath))
+            if (!File.Exists(CommClass.filePath))
             {
                 Form1 f1 = new Form1();
                 f1.ShowDialog();
+                if (f1.DialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
             }
-            CC.Connection = File.ReadAllText(filePath);
-            SqlConnection con = new SqlConnection(CC.Connection);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("LoginCredential", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@status", "test");
-            int test = cmd.ExecuteNonQuery();
-            con.Close();
-            if (test != 1)
+            else
             {
-                Form1 f1 = new Form1();
-                f1.ShowDialog();
+                CommClass.Connection = File.ReadAllText(CommClass.filePath);
+                SqlConnection con = new SqlConnection(CommClass.Connection);
+                try
+                {
+                    con.Open();
+                }
+                catch (SqlException ex)
+                {
+                    Form1 f1 = new Form1();
+                    f1.ShowDialog();
+                    if (f1.DialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
-
+            
             Application.Run(new LoginForm());
-
         }
+
     }
 }
 
