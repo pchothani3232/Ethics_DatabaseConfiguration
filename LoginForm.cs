@@ -36,35 +36,37 @@ namespace DatabaseConfiguration
         private void btnLogin_Click(object sender, EventArgs e)
         
         {
-            string connStr = File.ReadAllText("D://PRIYA.CHOTHANI//dbconfig2.txt");
 
-            SqlConnection con = new SqlConnection(connStr);
+            SqlConnection con = new SqlConnection(CommClass.Connection);
 
             try
             {
                 con.Open();
+                SqlCommand cmd = new SqlCommand("LoginCredential", con);  //LoginCredential = stored procedure name
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Username", txtUnm.Text);
+                cmd.Parameters.AddWithValue("@Password", txtPwd.Text);
+                cmd.Parameters.AddWithValue("@status", "Select");
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                con.Close();
+
+                if(dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("Login Successful");
+                }
+                else
+                {
+                    MessageBox.Show("Login not Successful");
+                }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Connection Failed:\n" + ex.Message);
                 return;
             }
-
-
-            //string connStr = File.ReadAllText("D://PRIYA.CHOTHANI//dbconfig2.txt");
-            //MessageBox.Show(connStr); // For debugging
-
-            
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("LoginCredential", con);  //LoginCredential = stored procedure name
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Username", txtUnm.Text);
-            cmd.Parameters.AddWithValue("@Password", txtPwd.Text);
-            cmd.Parameters.AddWithValue("@status", "Select");
-            cmd.ExecuteNonQuery();
-
-            MessageBox.Show("Login Successful");
 
 
         }
