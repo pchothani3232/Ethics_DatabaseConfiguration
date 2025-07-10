@@ -9,17 +9,20 @@ GO
 ALTER    procedure [dbo].[LoginCredential]
  @Username nvarchar(50) = '',
  @Password nvarchar(50) = '',
- @Status nvarchar(50) = ''
+ @status nvarchar(50) = ''
 As
 Begin
 
 	if @status='Select'
 	Begin
+		--select Username , Password from Users where Username=@Username and Password=@Password;
 		select * from Users where Username=@Username AND Password=@Password;
 	end
 
 	else if @status='test'
 	Begin
-		select 1 AS test
+		select 1 AS test;
 	end
 end	
+
+--exec [LoginCredential];
