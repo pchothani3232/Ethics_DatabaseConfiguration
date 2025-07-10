@@ -21,20 +21,9 @@ namespace DatabaseConfiguration
 
 
         //string filePath = "D://PRIYA.CHOTHANI//dbconfig2.txt";
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-             
-        }
-
-        private void txtUnm_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+      
         //Login -Button
-        private void btnLogin_Click(object sender, EventArgs e)
-        
+        private void btnLogin_Click(object sender, EventArgs e)       
         {
 
             SqlConnection con = new SqlConnection(CommClass.Connection);
@@ -70,6 +59,8 @@ namespace DatabaseConfiguration
 
 
         }
+
+        
     }
 }
  
