@@ -24,7 +24,7 @@ namespace DatabaseConfiguration
 
             if (!File.Exists(CommClass.filePath))
             {
-                Form1 f1 = new Form1();
+                DatabaseConfigurationForm f1 = new DatabaseConfigurationForm();
                 f1.ShowDialog();
                 if (f1.DialogResult == DialogResult.Cancel)
                 {
@@ -41,7 +41,7 @@ namespace DatabaseConfiguration
                 }
                 catch (SqlException ex)
                 {
-                    Form1 f1 = new Form1();
+                    DatabaseConfigurationForm f1 = new DatabaseConfigurationForm();
                     f1.ShowDialog();
                     if (f1.DialogResult == DialogResult.Cancel)
                     {
@@ -53,10 +53,11 @@ namespace DatabaseConfiguration
                     con.Close();
                 }
             }
-            
-            Application.Run(new LoginForm());
+
+            //Application.Run(new SalesInvoice());
+            //Application.Run(new LoginForm());
+            Application.Run(new ListPage());
         }
 
     }
 }
-
